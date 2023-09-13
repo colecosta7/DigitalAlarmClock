@@ -1,0 +1,4 @@
+../Core/Src/LCD_lib/LCD.c:10:6:I2C_init	4	static
+../Core/Src/LCD_lib/LCD.c:46:6:LCD_init	24	static
+../Core/Src/LCD_lib/LCD.c:76:6:LCD_writeINSTR	16	static
+../Core/Src/LCD_lib/LCD.c:121:6:LCD_writeDATA	16	static

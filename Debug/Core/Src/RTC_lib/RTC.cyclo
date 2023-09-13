@@ -1,0 +1,7 @@
+RTC.c:10:6:RTC_init	1
+RTC.c:46:6:RTC_write	4
+RTC.c:76:9:RTC_read	5
+RTC.c:125:6:RTC_setTime	8
+RTC.c:151:6:RTC_readTimes	10
+RTC.c:245:6:RTC_setAlarmTime	5
+RTC.c:261:10:uint16ToString	5

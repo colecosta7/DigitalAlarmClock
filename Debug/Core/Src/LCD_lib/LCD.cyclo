@@ -1,0 +1,4 @@
+LCD.c:10:6:I2C_init	1
+LCD.c:46:6:LCD_init	8
+LCD.c:76:6:LCD_writeINSTR	6
+LCD.c:121:6:LCD_writeDATA	3

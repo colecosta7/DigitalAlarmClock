@@ -1,0 +1,4 @@
+../Core/Src/UART_lib/UART.c:13:6:UART_init	4	static
+../Core/Src/UART_lib/UART.c:39:6:UART_print_char	24	static
+../Core/Src/UART_lib/UART.c:48:6:UART_print	32	static
+../Core/Src/UART_lib/UART.c:61:6:UART_ESC_code	32	static
