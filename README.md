@@ -10,6 +10,14 @@ incorrect values. This means that upon disconnecting from power, the current tim
 //Digital Alarm Clock FSM
 ![P3FSM (1)](https://github.com/colecosta7/DigitalAlarmClock/assets/81593806/8b80d360-15fb-44aa-bce8-3a38e5b3d99f)
 
+//Hardware Setup
+![CDFF3054-FB51-48CE-B78B-909A37FC54C5_1_105_c](https://github.com/colecosta7/DigitalAlarmClock/assets/81593806/03726ffc-b516-43fc-aaef-f25cfcff233b)
+
+
+![E69FB99D-A6C6-449C-B8D8-EB48D8DAEDCE_1_105_c](https://github.com/colecosta7/DigitalAlarmClock/assets/81593806/9d3420dd-c918-4bb9-819d-1c1e3c795ab7)
+
+
+
 
 //UART Terminal Screens
 //Clock Display
