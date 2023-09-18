@@ -13,6 +13,7 @@ incorrect values. This means that upon disconnecting from power, the current tim
 
 //UART Terminal Screens
 //Clock Display
+
 <img width="405" alt="P3ClockDisplay" src="https://github.com/colecosta7/DigitalAlarmClock/assets/81593806/27715f1c-f511-4b57-baaf-585072c09082">
 
 //Set Clock Display
