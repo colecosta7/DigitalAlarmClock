@@ -2,7 +2,7 @@
 The digital alarm clock designed in this experiment utilizes a Nucleo-L476RG board [1-2], a DS3231 Real Time Clock Module [3], a buzzer, a 4x4 hard-key keypad, and a UART terminal. 
 The digital alarm clock is organized into a finite state machine consisting of 7 states. The clock features 4 different commands input from the keypad: set the current time/date, 
 set an alarm, display a list of commands, and display the current alarm. Upon connecting to power, the clock and alarm are not set, therefore the initial time and alarm set display 
-incorrect values. This means that upon disconnecting from power, the current time/date and alarms are reset. The initial state of the device is the GET_KEY state.
+incorrect values. This means that upon disconnecting from power, the current time/date and alarms are reset. The initial state of the device is the GET_KEY state. Main source code can be found in the Core folder.
 
 //System Schematic
 ![P3Schematic](https://github.com/colecosta7/DigitalAlarmClock/assets/81593806/1b88e920-25b5-4c80-8180-06e934fae376)
