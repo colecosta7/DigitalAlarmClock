@@ -16,6 +16,10 @@ void I2C_init(void);
 void LCD_init(void);
 void LCD_writeINSTR(uint8_t data);
 void LCD_writeDATA(uint8_t data);
+void LCD_writeString(char *str);
+void LCD_clearDisplay(void);
+void LCD_replaceCursor(void);
+void LCD_putCursor(uint8_t row, uint8_t col);
 
 
 

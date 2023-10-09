@@ -36,7 +36,7 @@ void I2C_init(void){
 	GPIOB -> AFR[1] |= (4 << GPIO_AFRH_AFSEL8_Pos |
 			4 << GPIO_AFRH_AFSEL9_Pos);
 	//Set open drain SDA and SCL
-	GPIOB -> OTYPER |= (GPIO_OTYPER_OT8 | GPIO_OTYPER_OT8);
+	GPIOB -> OTYPER |= (GPIO_OTYPER_OT8 | GPIO_OTYPER_OT9);
 	//very high speed
 	GPIOB -> OSPEEDR |= (GPIO_OSPEEDR_OSPEED8 | GPIO_OSPEEDR_OSPEED9);
 	//no pull up or pull down - will use a 2k resistor in hardware
@@ -59,16 +59,15 @@ void LCD_init(void){
 	//delay again
 	for(uint16_t i = 0; i < 1000; i++);
 	//write the 4 bit interface
-	LCD_writeINSTR(0x30);
+	LCD_writeINSTR(0x20);
 	//delay again
 	for(uint16_t i = 0; i < 1000; i++);
 	//set to 2 line 5x8 font
 	LCD_writeINSTR(0x28);
 	//delay again
 	for(uint16_t i = 0; i < 1000; i++);
-	//turn off display
+	//clear display function set
 	LCD_writeINSTR(0x00);
-	//delay
 	for(uint16_t i = 0; i < 1000; i++);
 
 }
@@ -121,7 +120,7 @@ void LCD_writeINSTR(uint8_t data){
 void LCD_writeDATA(uint8_t data){
 	//set the number of bytes to be sent
 	I2C1 -> CR2 &= ~(I2C_CR2_NBYTES);
-	I2C1 -> CR2 |= (2 << I2C_CR2_NBYTES_Pos);
+	I2C1 -> CR2 |= (4 << I2C_CR2_NBYTES_Pos);
 	//configure the slave address
 	I2C1 -> CR2 &= ~(I2C_CR2_SADD);
 	I2C1 -> CR2 |= (LCDADDR << 1);
@@ -132,15 +131,56 @@ void LCD_writeDATA(uint8_t data){
 	//set I2C start bit
 	I2C1 -> CR2 |= (I2C_CR2_START);
 
-	//send the upper nibble of data
+	//send the upper nibble of data with EN=1
 	//wait for TX to be empty
 	while(!(I2C1 -> ISR & I2C_ISR_TXIS));
-	I2C1 -> TXDR = (data & 0xF0);
+	I2C1 -> TXDR = (data & 0xF0) | 0x0D;
+
+	//send the upper nibble of data with EN=0
+	while(!(I2C1 -> ISR & I2C_ISR_TXIS));
+	I2C1 -> TXDR = (data & 0xF0) | 0x09;
+
+	//send the lower nibble of data with EN=1
+	while(!(I2C1 -> ISR & I2C_ISR_TXIS));
+	I2C1 -> TXDR = ((data & 0x0F) << 4) | 0x0D;
+
+	//send the lower nibble of data with EN=0
+	while(!(I2C1 -> ISR & I2C_ISR_TXIS));
+	I2C1 -> TXDR = ((data & 0x0F) << 4) | 0x09;
 
 	//wait for transfer to complete
 	while(!(I2C1 -> ISR & I2C_ISR_TC));
 	//send stop condition
 	I2C1 -> CR2 |= (I2C_CR2_STOP);
 
+}
+
+void LCD_writeString(char *str){
+	while (*str) LCD_writeDATA(*str++);
+}
+
+void LCD_clearDisplay(void){
+	//reset cursor
+	LCD_writeINSTR(0x80);
+	//loop all spaces
+	for(int16_t i = 0; i < 70; i++){
+		//write an empty char
+		LCD_writeDATA(' ');
+
+	}
+}
+
+void LCD_replaceCursor(void){
+	LCD_writeINSTR(0x80);
+}
+
+void LCD_putCursor(uint8_t row, uint8_t col){
+	if(row == 0){
+		col |= 0x80;
+	}
+	else
+		col |= 0xC0;
+
+	LCD_writeINSTR(col);
 }
 
